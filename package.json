@@ -1,0 +1,17 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "description": "Product App",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Seyi",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "mongoose": "^5.7.14"
+  }
+}
