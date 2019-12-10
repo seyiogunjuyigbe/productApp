@@ -22,30 +22,35 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../public')));
 const Product = require('./model');
 
-// Product.create({
-//     name: faker.commerce.productName(),
-//     price: Number(faker.commerce.price())
-// }, (err,product)=>{
-//     if(!err){
-//         console.log(product)
-//     } else{
-//         console.log(err)
-//     }
-// })
-Product.find({}, (err,products)=>{
+Product.create({
+    name: faker.commerce.productName(),
+    price: Number(faker.commerce.price())
+}, (err,product)=>{
     if(!err){
-        console.log(products)
+        console.log(product)
     } else{
         console.log(err)
     }
 })
-app.get('/', (req,res)=>{
-    res.render('test', {url: URL})
 
+app.get('/', (req,res)=>{
+    Product.find({}, (err,products)=>{
+        if(!err){
+           return res.status(200).render('index', {products: products})
+        } else{
+            return res.status(404).status({err:err.message})
+        }
+    })
 })
 
-app.get('/test', (req,res)=>{
-    res.json({status: res.statusCode})
+app.get('/getPrice', (req,res)=>{
+    Product.find({}, (err,products)=>{
+        if(!err){
+            res.json({products: products})
+        } else{
+            return res.status(404).status({err:err.message})
+        }
+    })
 
 })
 const port = process.env.PORT || 3000;

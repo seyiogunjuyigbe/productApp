@@ -1,0 +1,19 @@
+<h1>Place your order</h1>
+<span id='url' data='<%=url%>'></span>
+<div class="container">
+    <select name="" id="productSel">
+        <%products.forEach((product)=>{ %>
+            <option value="<%=product.name%>"><%=product.name%></option>
+            <% }) %>
+    </select>
+</div>
+
+<script>
+var request = new XMLHttpRequest();
+var url = document.querySelector('#url').getAttribute('data');
+request.open('GET', `${url}/test`, true)
+request.onload = ()=>{
+const data = JSON.parse(request.response)
+request.send();
+}
+</script>
