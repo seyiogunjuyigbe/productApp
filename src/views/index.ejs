@@ -1,11 +1,28 @@
+<%-include ('./partials/header.ejs')%>
 <h1>Place your order</h1>
 <span id='url' data='<%=url%>'></span>
 <div class="container">
-    <select name="" id="productSel">
+    <form action="">
+      <select class="form-control" name="product" id="productSel" required>
+            <option value="">-Select Product-</option>
         <%products.forEach((product)=>{ %>
             <option value="<%=product.name%>"><%=product.name%></option>
             <% }) %>
     </select>
+    <select class="form-control" name="size" id="size">
+        <option value="">-Select Size-</option>
+        <option value="xl">XtraLarge</option>
+        <option value="lg">Large</option>
+        <option value="rg">Regular</option>
+        <option value="sm">Small</option>
+        <option value="xs">XtraSmall</option>
+    </select>
+    <input class="form-control" type="number" min="1" name="amount" id="amt" required>
+          <input class="form-control" type="submit" value="Purchase">
+</form>
+    <div id="cart">
+    
+    </div>
 </div>
 
 <script>
@@ -17,3 +34,4 @@ const data = JSON.parse(request.response)
 request.send();
 }
 </script>
+<%-include ('./partials/header.ejs')%>

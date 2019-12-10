@@ -36,7 +36,7 @@ Product.create({
 app.get('/', (req,res)=>{
     Product.find({}, (err,products)=>{
         if(!err){
-           return res.status(200).render('index', {products: products})
+           return res.status(200).render('index', {products: products, url:URL})
         } else{
             return res.status(404).status({err:err.message})
         }
