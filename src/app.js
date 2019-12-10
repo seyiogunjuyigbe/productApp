@@ -43,10 +43,10 @@ app.get('/', (req,res)=>{
     })
 })
 
-app.get('/getPrice', (req,res)=>{
-    Product.find({}, (err,products)=>{
+app.get('/:prod/getPrice', (req,res)=>{
+    Product.findById(req.params.prod, (err,product)=>{
         if(!err){
-            res.json({products: products})
+            res.json({price: product.price})
         } else{
             return res.status(404).status({err:err.message})
         }

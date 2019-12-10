@@ -6,7 +6,7 @@
       <select class="form-control" name="product" id="productSel" required>
             <option value="">-Select Product-</option>
         <%products.forEach((product)=>{ %>
-            <option value="<%=product.name%>"><%=product.name%></option>
+            <option data='<%=product._id%>' value="<%=product.name%>"><%=product.name%></option>
             <% }) %>
     </select>
     <select class="form-control" name="size" id="size">
@@ -28,10 +28,21 @@
 <script>
 var request = new XMLHttpRequest();
 var url = document.querySelector('#url').getAttribute('data');
-request.open('GET', `${url}/test`, true)
+const productSel = document.querySelector('#productSel');
+const getPrice = ()=>{
+   var id = productSel.data;
+   console.log(id)
+request.open('GET', `${url}/`, true)
 request.onload = ()=>{
 const data = JSON.parse(request.response)
-request.send();
+// request.send();
+} 
+
 }
+productSel.onchange = getPrice;
+const options = document.querySelectorAll('#productSel option');
+options.forEach((option)=>{
+    option.onselect = ()=>console.log(this.value)
+})
 </script>
 <%-include ('./partials/header.ejs')%>
