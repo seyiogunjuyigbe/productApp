@@ -14,7 +14,9 @@ const getPrice = ()=>{
             id = productSel.options[i].getAttribute('data')
         }
     }
-    request.open('GET', `${url}/${id}/price`, true)
+    const link = `${url}/${id}/price`
+    console.log(link)
+    request.open('GET', link, true)
     request.onload = ()=>{
        data = JSON.parse(request.response)
         cart.textContent = Number(data.price) * Number(amt.value);
