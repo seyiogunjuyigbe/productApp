@@ -1,48 +1,42 @@
 <%-include ('./partials/header.ejs')%>
-<h1>Place your order</h1>
 <span id='url' data='<%=url%>'></span>
 <div class="container">
-    <form action="">
-      <select class="form-control" name="product" id="productSel" required>
-            <option value="">-Select Product-</option>
-        <%products.forEach((product)=>{ %>
-            <option data='<%=product._id%>' value="<%=product.name%>"><%=product.name%></option>
-            <% }) %>
-    </select>
-    <select class="form-control" name="size" id="size">
-        <option value="">-Select Size-</option>
-        <option value="xl">XtraLarge</option>
-        <option value="lg">Large</option>
-        <option value="rg">Regular</option>
-        <option value="sm">Small</option>
-        <option value="xs">XtraSmall</option>
-    </select>
-    <input class="form-control" type="number" min="1" name="amount" id="amt" required>
-          <input class="form-control" type="submit" value="Purchase">
-</form>
-    <div id="cart">
-    
+<h1>Place your order</h1>
+
+    <div class="row">
+        <div class="col-lg-8 col-sm-6">
+                <form action="/success" method="GET">
+                        <select class="form-control" name="product[name]" id="productSel" required>
+                              <option value="">-Select Product-</option>
+                             <% if(products.length >=1){ %>
+                          <%products.forEach((product)=>{ %>
+                              <option data='<%=product._id%>' value="<%=product.name%>"><%=product.name%></option>
+                              <% }) } %>
+                  
+                      </select>
+                      <select class="form-control" name="product[size]" id="size">
+                          <option value="">-Select Size-</option>
+                          <option value="xl">XtraLarge</option>
+                          <option value="lg">Large</option>
+                          <option value="rg">Regular</option>
+                          <option value="sm">Small</option>
+                          <option value="xs">XtraSmall</option>
+                      </select>
+                      <input class="form-control" type="number" min="1" name="product[amount]" id="amt" required>
+                      <input type="text" id="price" name="product[price]" hidden>
+                            <input class="form-control btn btn-success" type="submit" value="Purchase">
+                  </form>
+        </div>
+       
+    <div class="col-lg-4 col-sm-6" id="cartDiv">
+        <p>
+            <span>Total Price: </span>
+            <span id="naira">N</span>
+            <span id="cart"></span>
+        </p>
     </div>
 </div>
+</div>
 
-<script>
-var request = new XMLHttpRequest();
-var url = document.querySelector('#url').getAttribute('data');
-const productSel = document.querySelector('#productSel');
-const getPrice = ()=>{
-   var id = productSel.data;
-   console.log(id)
-request.open('GET', `${url}/`, true)
-request.onload = ()=>{
-const data = JSON.parse(request.response)
-// request.send();
-} 
-
-}
-productSel.onchange = getPrice;
-const options = document.querySelectorAll('#productSel option');
-options.forEach((option)=>{
-    option.onselect = ()=>console.log(this.value)
-})
-</script>
-<%-include ('./partials/header.ejs')%>
+<script src="/js/script.js"></script>
+<%-include ('./partials/footer.ejs')%>

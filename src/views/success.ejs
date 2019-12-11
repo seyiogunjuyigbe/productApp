@@ -1,0 +1,13 @@
+<%-include ('./partials/header.ejs')%>
+<div class="container">
+    <div class="jumbotron">
+        <h3 class="text-center">You have successfully purchased</h3>
+        <p class="text-center">Product: <%=product.name%></p>
+        <p class="text-center">Size: <%=product.size.toUpperCase()%></p>
+        <p class="text-center">Amount: <%=product.amount%></p>
+        <p class="text-center" style="font-weight:bold">Price: <%=product.price%></p>
+
+    </div>
+    <a href="/" class="btn btn-primary">Back to Store</a>
+</div>
+<%-include ('./partials/footer.ejs')%>
