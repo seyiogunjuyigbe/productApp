@@ -1,11 +1,11 @@
 form .form-control{
-    width: 60%;
+    width: 70%;
 }
 #naira{
     text-decoration:line-through;
     text-decoration-style:double;
 }
 #cartDiv{
-    border: 2px dashed steelblue;
+    border: 4px dashed steelblue;
     padding: 4em;
    }

@@ -1,7 +1,7 @@
 const express = require('express');
 const  router = express.Router({mergeParams: true});
 const path = require('path')
-const URL = 'http://localhost:3000';
+const URL = process.env.URL;
 router.use(express.static(path.join(__dirname, '../public')));
 
 const Product = require('./model');
@@ -29,7 +29,6 @@ router.get('/:prod/price', (req,res)=>{
 
 router.get('/success', (req,res)=>{
     let product = req.query.product;
-    console.log(product)
     res.render('success', {product:product})
 })
 
