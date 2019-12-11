@@ -6,8 +6,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const routes = require('./routes')
-app.use("/", routes);
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +36,19 @@ const seed = ()=>{
         })
     }
 }
-seed();
+// seed();
+
+app.get('/', (req,res)=>{
+    Product.find({}, (err,products)=>{
+        if(!err){
+           return res.status(200).render('index', {products: products, url:URL})
+        } else{
+            return res.status(404).status({err:err.message})
+        }
+    })
+})
+
+const routes = require('./routes')
+app.use("/", routes);
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>console.log(`Connected to ${port}`))
