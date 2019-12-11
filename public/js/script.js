@@ -15,7 +15,6 @@ const getPrice = ()=>{
         }
     }
     const link = `${url}/${id}/price`
-    console.log(link)
     request.open('GET', link, true)
     request.onload = ()=>{
        data = JSON.parse(request.response)
