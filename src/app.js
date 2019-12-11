@@ -42,6 +42,7 @@ const getProducts = (req,res)=>{
         if(err){
             return res.status(404).json({err:err.message})
         } else{
+            console.log(products)
            return res.status(200).render('index', {products: products, url:URL})
         }
     })
