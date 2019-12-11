@@ -33,6 +33,13 @@ const getProducts = (req,res)=>{
         }
     })
 }
+Product.find({}, (err,products)=>{
+    if(err){
+        console.log(err)
+    } else{
+        console.log(products)
+    }
+})
 app.get('/', getProducts)
 app.get('/:prod/price', (req,res)=>{
     Product.findById(req.params.prod, (err,product)=>{
