@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
-
+const URL = process.env.URL
 
 
 app.set('view engine', 'ejs');
@@ -42,7 +42,7 @@ const getProducts = (req,res)=>{
         if(err){
             return res.status(404).json({err:err.message})
         } else{
-           return res.status(200).render('index', {products: products, url:process.env.URL})
+           return res.status(200).render('index', {products: products, url:URL})
         }
     })
 }
