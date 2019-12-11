@@ -37,17 +37,16 @@ const seed = ()=>{
     }
 }
 // seed();
-
-app.get('/', (req,res)=>{
-   
+const getProducts = (req,res)=>{
     Product.find({}, (err,products)=>{
         if(err){
             return res.status(404).json({err:err.message})
         } else{
-           return res.status(200).render('index', {products: products, url:URL})
+           return res.status(200).render('index', {products: products, url:process.env.URL})
         }
     })
-})
+}
+app.get('/', getProducts)
 app.get('/:prod/price', (req,res)=>{
     Product.findById(req.params.prod, (err,product)=>{
         if(!err){
