@@ -6,7 +6,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 const URL = process.env.URL
-
+const DB  = process.env.DB
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -14,29 +14,15 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DB, {
+mongoose.connect(DB, {
     useNewUrlParser:true,
     useFindAndModify: true,
     useCreateIndex: true,
     useUnifiedTopology: true
-}, ()=> console.log("Successfully connected to " + process.env.DB)
+}, ()=> console.log("Successfully connected to " + DB)
 );
 const Product = require('./model');
-const seed = ()=>{
-    for(var i=0; i<10; i++){
-        Product.create({
-            name: faker.commerce.productName(),
-            price: faker.commerce.price()
-        }, (err,product)=>{
-            if(!err){
-                console.log(product)
-            } else{
-                console.log(err)
-            }
-        })
-    }
-}
-// seed();
+
 const getProducts = (req,res)=>{
     Product.find({}, (err,products)=>{
         if(err){
